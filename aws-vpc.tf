@@ -114,6 +114,16 @@ resource "aws_route_table" "us-east-1-private" {
 	}
 }
 
+resource "aws_route_table_association" "us-east-1b-private" {
+	subnet_id = "${aws_subnet.us-east-1b-private.id}"
+	route_table_id = "${aws_route_table.us-east-1-private.id}"
+}
+
+resource "aws_route_table_association" "us-east-1d-private" {
+	subnet_id = "${aws_subnet.us-east-1d-private.id}"
+	route_table_id = "${aws_route_table.us-east-1-private.id}"
+}
+
 # Bastion
 
 resource "aws_security_group" "bastion" {
