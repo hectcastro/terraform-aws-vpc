@@ -15,23 +15,23 @@ resource "aws_internet_gateway" "default" {
 # NAT instance
 
 resource "aws_security_group" "nat" {
-    name = "nat"
-    description = "Allow services from the private subnet through NAT"
+	name = "nat"
+	description = "Allow services from the private subnet through NAT"
 
-    ingress {
- 		from_port = 0
-        to_port = 65535
-    	protocol = "tcp"
-    	cidr_blocks = ["${aws_subnet.us-east-1b-private.cidr_block}"]
-    }
-    ingress {
- 		from_port = 0
-        to_port = 65535
-    	protocol = "tcp"
-    	cidr_blocks = ["${aws_subnet.us-east-1d-private.cidr_block}"]
-    }
+	ingress {
+		from_port = 0
+		to_port = 65535
+		protocol = "tcp"
+		cidr_blocks = ["${aws_subnet.us-east-1b-private.cidr_block}"]
+	}
+	ingress {
+		from_port = 0
+		to_port = 65535
+		protocol = "tcp"
+		cidr_blocks = ["${aws_subnet.us-east-1d-private.cidr_block}"]
+	}
 
-    vpc_id = "${aws_vpc.default.id}"
+	vpc_id = "${aws_vpc.default.id}"
 }
 
 resource "aws_instance" "nat" {
@@ -78,13 +78,13 @@ resource "aws_route_table" "us-east-1-public" {
 }
 
 resource "aws_route_table_association" "us-east-1b-public" {
-    subnet_id = "${aws_subnet.us-east-1b-public.id}"
-    route_table_id = "${aws_route_table.us-east-1-public.id}"
+	subnet_id = "${aws_subnet.us-east-1b-public.id}"
+	route_table_id = "${aws_route_table.us-east-1-public.id}"
 }
 
 resource "aws_route_table_association" "us-east-1d-public" {
-    subnet_id = "${aws_subnet.us-east-1d-public.id}"
-    route_table_id = "${aws_route_table.us-east-1-public.id}"
+	subnet_id = "${aws_subnet.us-east-1d-public.id}"
+	route_table_id = "${aws_route_table.us-east-1-public.id}"
 }
 
 # Private subsets
@@ -124,10 +124,10 @@ resource "aws_security_group" "bastion" {
 		from_port = 22
 		to_port = 22
 		protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
+		cidr_blocks = ["0.0.0.0/0"]
 	}
 
-    vpc_id = "${aws_vpc.default.id}"
+	vpc_id = "${aws_vpc.default.id}"
 }
 
 resource "aws_instance" "bastion" {
